@@ -5,6 +5,10 @@
  */
 package entities;
 
+import dto.BankCustomerDTO;
+import facades.Facade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -28,6 +32,9 @@ public class MakeTestData {
         }finally{
             em.close();
         }
+
+   
+        
     }
     
 }

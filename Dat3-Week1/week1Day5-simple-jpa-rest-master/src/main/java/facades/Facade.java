@@ -52,7 +52,7 @@ public class Facade {
     public List<BankCustomerDTO> getCustomerByName(String name) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<BankCustomer> query = em.createQuery("SELECT b FROM BankCustomer b WHERE b.fullName = :name", BankCustomer.class).setParameter("name", name);
+            TypedQuery<BankCustomer> query = em.createQuery("SELECT b FROM BankCustomer b WHERE b.firstName = :name", BankCustomer.class).setParameter("name", name);
             List<BankCustomerDTO> result = new ArrayList();
             for(BankCustomer bc : query.getResultList()){
                 result.add(new BankCustomerDTO(bc));
@@ -76,7 +76,7 @@ public class Facade {
     }
 
     public List<BankCustomer> getAllBankCustomers() {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEntityManager();
         try{
             TypedQuery<BankCustomer> query = em.createQuery("SELECT b FROM BankCustomer b", BankCustomer.class);
             return query.getResultList();

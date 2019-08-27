@@ -26,6 +26,7 @@ public class FacadeTest {
     
     private static EntityManagerFactory emf;
     private static Facade fc;
+    private static EntityManager em;
     
     public FacadeTest() {
     }
@@ -33,20 +34,29 @@ public class FacadeTest {
     @BeforeClass
     public static void setUpClass() {
         emf = Persistence.createEntityManagerFactory("putest");
-         EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
+        fc = Facade.getFacade(emf);
+        
+        BankCustomer c1 = new BankCustomer("Asger", "hermind", "123", 123.0, 12, "what");
+        BankCustomer c2 = new BankCustomer("Vikke", "Vikkesen", "13", 0, 0, "what");
+        BankCustomer c3 = new BankCustomer("Martin", "Martinsen", "321", 0, 0, "what");
+        
         try{
             em.getTransaction().begin();
-            em.persist(new BankCustomer("Andreas", "Vikke", "999", 1234.15, 30, "fattig studerende" ));
-            em.persist(new BankCustomer("William", "Housefield", "420", 100000.00, 15, "rig studerende" ));
-            em.persist(new BankCustomer("Martin", "Eli", "250", 19240.75, 28, "Ikke indvandre" ));
-            em.persist(new BankCustomer("Asger", "Hermind", "111", 100000000.15, 1, "studerende" ));
+            em.persist(c1);
+            em.persist(c2);
+            em.persist(c3);
             em.getTransaction().commit();
         }finally{
             em.close();
         }
+        
+        c1.setId(1L);
+        c2.setId(2L);
+        c3.setId(3L);
+        
+        
     }
-    
-  
 
     /**
      * Test of getCustomerByID method, of class Facade.
@@ -54,9 +64,8 @@ public class FacadeTest {
     @Test
     public void testGetCustomerByID() {
         System.out.println("getCustomerByID");
-        BankCustomerDTO result = fc.getCustomerByID(2);
-        assertNotNull(result);
-        assertEquals("Andreas Vikke", result.getFullName());
+        BankCustomerDTO result = fc.getCustomerByID(1L);
+        assertEquals("Asger hermind", result.getFullName());
     }
 
     /**
@@ -65,8 +74,8 @@ public class FacadeTest {
     @Test
     public void testGetCustomerByName() {
         System.out.println("getCustomerByName");
-        List<BankCustomerDTO> result = fc.getCustomerByName("Andreas Vikke");
-        assertEquals("999", result.get(0).getAccountNumber());
+        List<BankCustomerDTO> result = fc.getCustomerByName("Asger");
+        assertEquals("Asger hermind", result.get(0).getFullName());
     }
 
     /**
@@ -75,13 +84,9 @@ public class FacadeTest {
     @Test
     public void testAddCustomer() {
         System.out.println("addCustomer");
-        BankCustomer cust = null;
-        Facade instance = null;
-        BankCustomer expResult = null;
-        BankCustomer result = instance.addCustomer(cust);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        BankCustomer cust = new BankCustomer("test", "test", "000", 0, 0, "test");
+        BankCustomer result = fc.addCustomer(cust);
+        assertEquals("test", result.getFirstName());
     }
 
     /**
@@ -90,12 +95,8 @@ public class FacadeTest {
     @Test
     public void testGetAllBankCustomers() {
         System.out.println("getAllBankCustomers");
-        Facade instance = null;
-        List<BankCustomer> expResult = null;
-        List<BankCustomer> result = instance.getAllBankCustomers();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<BankCustomer> result = fc.getAllBankCustomers();
+        assertEquals(4, result.size());
     }
     
 }
