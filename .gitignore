@@ -1,3 +1,46 @@
-/Dat3-Week2/Onsdag/basicHTTP/target/
-/Dat3-Week2/Onsdag/BasicHTTP/target/
-/Dat3-Week2/Onsdag/Sessions/Sessions/target/
+# Created by https://www.gitignore.io/api/macos,netbeans,java-web
+# Edit at https://www.gitignore.io/?templates=macos,netbeans,java-web
+
+### Java-Web ###
+## ignoring target file
+target/
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### NetBeans ###
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# End of https://www.gitignore.io/api/macos,netbeans,java-web
