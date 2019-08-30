@@ -2,7 +2,7 @@
 Assignments hand in master
 
 
-Tirsdags opgavens besvarelse ligger under mappen som docx document. 
+#Tirsdags opgavens besvarelse ligger under mappen som docx document. 
 
 Onsdagsopgavens tekst dokument ligger også under dens mappe.
 Opgave besvarelsen findes på:
