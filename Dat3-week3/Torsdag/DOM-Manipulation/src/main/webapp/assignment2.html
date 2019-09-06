@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment 2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id="a2div1" onclick="functionD1(this.id)">a2div1</div>
+        <div id="a2div2" onclick="functionD2(this.id)">a2div2</div>
+
+        <div id="outerDIva2" onclick="functionD10(this.id)">
+            <div id="a2div3" >a2div3</div>
+            <div id="a2div4" >a2div4</div>
+            <div id="a2div5" >a2div5</div>
+            <div id="a2div6" >a2div6</div>
+            <div id="a2div7" >a2div7</div>
+            <div id="a2div8" >a2div8</div>
+            <div id="a2div9" >a2div9</div>
+            <div id="a2div10" >a2div10</div>
+            <div id="a2div11" >a2div11</div>
+            <div id="a2div12" >a2div12</div>
+        </div>
+        
+        <script>
+            function functionD1(id) {
+                console.log("hello from " + document.getElementById("a2div1") + id);
+            }
+            function functionD2(id) {
+                console.log("hello from " + document.getElementById("a2div2") + id);
+            }
+            
+            
+            function functionD10(id){
+                console.log("hello from " + document.getElementById("outerDIva2") + id);
+            }
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Assignment 1</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body onload="onloadChange()">
+        
+        <div id="onload1" >i'll change color when we load</div>
+        <div id="onload2" >i'll change color when we load</div>
+        <div id="onload3" >i'll change color when we load</div>
+
+        <br>
+        
+        <div id="div1">hello to div1</div>
+
+        <div id="div2" > hello to div2</div>
+
+        <div id="div3" >hello to div3</div>
+        <button type="button" onclick="changeColor()">try me </button>
+
+        <script>
+            function onloadChange(){
+                document.getElementsByTagName("div")[0].style.backgroundColor = "red";
+                document.getElementsByTagName("div")[1].style.backgroundColor = "blue";
+                document.getElementsByTagName("div")[2].style.backgroundColor = "orange";
+                
+            }
+            
+            function changeColor() {
+                document.getElementById("div1").style.color = "red";
+                document.getElementById("div2").style.color = "blue";
+                document.getElementById("div3").style.color = "orange";
+            }
+        </script>
+    </body>
+</html>
