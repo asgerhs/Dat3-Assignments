@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import entities.Movies;
 import utils.EMF_Creator;
 import facades.MovieFacade;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -44,8 +45,15 @@ public class MoviesResource {
 
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Movies entity) {
-        throw new UnsupportedOperationException();
+    public void addMovie(Movies entity) {
+        EntityManager em = EMF.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.persist(entity);
+            em.getTransaction().commit();
+        }finally{
+            em.close();
+        }
     }
     
     @PUT

@@ -19,8 +19,7 @@ function mul(n1, n2){
 
 var cb = function(n1,n2, callback){
   try{
-  typeof n1 === "number";
-  typeof callback === "function";
+  if(typeof n1 === "number" && typeof callback === "function" )
   return "Result from the two numbers: "+n1+"+"+n2+"="+callback(n1,n2);
   }catch(e){
       console.log("you must provide two numbers and which function you want to use.");
@@ -68,12 +67,10 @@ var mapped = filter.map(x => String(x).toUpperCase());
 
 console.log(mapped);
 
+var html = "<ul>" + names.map(x => "<li>" + x + "</li>").join(' ') + "</ul>"
+console.log(html);
 
-//
-//mapped.push("<ul>");
-//mapped.unshift("<ul>");
-//
-//console.log(mapped.join('<li>'));
+
 
 
 var cars = [
@@ -89,6 +86,12 @@ console.log(cars.filter(year => year.year >1999));
 console.log(cars.filter(make => make.make === 'Volvo'));
 
 console.log(cars.filter(price => price.price < 5000));
+
+
+var query = cars.map( x => "INSERT INTO cars (id,year,make,model,price) VALUES (" + x.id + ', '+ x.year +", "+ x.make +", "+ x.model +", "+ x.price + ")").join(";") + ";";
+
+console.log(query);
+
 
 
 
@@ -134,10 +137,10 @@ function Person(name){
 }
 
 
-////call it like this (do it, even if you know it’s silly ;-)
+//////call it like this (do it, even if you know it’s silly ;-)
 //Person("Kurt Wonnegut");  //This calls the function
 //console.log("I'm global: "+ name);  //Explain this
-
+//
 //var p = new Person("Kurt Wonnegut");  //Create an instance using the constructor function
 //console.log("I'm global: "+ name);  //What’s different ?
 
@@ -145,16 +148,59 @@ function Person(name){
 
 
 
-var greeter = function(){
-  console.log(this.message);
-};
-var comp1 = { message: "Hello World" };
-var comp2 = { message: "Hi" };
+//var greeter = function(){
+//  console.log(this.message);
+//};
+//var comp1 = { message: "Hello World" };
+//var comp2 = { message: "Hi" };
+//
+//var g1 = greeter.bind(comp1 );//We can store a reference, with a specific “this” to use
+//var g2 = greeter.bind(comp2 );//And here another “this”
+//setTimeout(g1,500);
+//setTimeout(g2,1000);
 
-var g1 = greeter.bind(comp1 );//We can store a reference, with a specific “this” to use
-var g2 = greeter.bind(comp2 );//And here another “this”
-setTimeout(g1,500);
-setTimeout(g2,1000);
+
+
+
+function myPerson(name, birthday, hobby){
+    this.name = name;
+    this.birthday = birthday;
+    this.hobby = hobby;
+}
+
+var testPerson = new myPerson("Martin", "11/11/11", "Smoking");
+
+for(var prop in testPerson){
+    console.log(prop, testPerson[prop]);
+}
+
+delete testPerson.hobby;
+
+for(var prop in testPerson){
+    console.log(prop, testPerson[prop]);
+}
+
+testPerson["hooby"] = "smoking";
+
+for(var prop in testPerson){
+    console.log(prop, testPerson[prop]);
+}
+
+
+function newPerson(firstName, lastName, age){
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    
+    this.getDetails = function(){
+        return "Firstname: " + firstName + "\n" + "Lastname: " + lastName + "\n" + "age: " + age + ".";
+    }
+}
+
+
+var np = new newPerson("Artem", "Ivanov", 666);
+console.log(np.getDetails());
+
 
 
 
