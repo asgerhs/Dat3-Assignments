@@ -44,3 +44,4 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/macos,netbeans,java-web
+.DS_Store
