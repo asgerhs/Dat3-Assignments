@@ -8,9 +8,12 @@ import utils.EMF_Creator;
 import facades.PersonFacade;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -62,13 +65,32 @@ public class PersonResource {
     }
     
     @Path("/delete/{id}")
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
+    @PUT
     public String deletePerson(@PathParam("id")int id){
         return new Gson().toJson(fc.deletePerson(id));
     }
     
+    @Path("/add/{fName}/{lName}/{phone}")
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String addPerson(@PathParam("fName")String fName, @PathParam("lName")String lName, @PathParam("phone")String phone){
+        PersonDTO dto = new PersonDTO(fc.addPerson(fName, lName, phone));
+        return new Gson().toJson(dto);
+    }
     
+    
+    public static void main(String[] args) {
+        EntityManager em = EMF.createEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.persist(new Person("William", "Housefield", "42069"));
+            em.persist(new Person("Asger", "Sørensen", "1234"));
+            em.getTransaction().commit();
+        }finally{
+            em.close();
+        }
+    }
 
         
  

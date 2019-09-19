@@ -18,6 +18,9 @@ public class PersonDTO implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String fName, lName, phone;
+
+    public PersonDTO() {
+    }
     
     
     public PersonDTO(Person p) {

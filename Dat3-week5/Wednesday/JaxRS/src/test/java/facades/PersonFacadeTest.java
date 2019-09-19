@@ -1,7 +1,8 @@
 package facades;
 
 import utils.EMF_Creator;
-import entities.RenameMe;
+import entities.Person;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -9,19 +10,20 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import utils.Settings;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class FacadeExampleTest {
+public class PersonFacadeTest {
 
     private static EntityManagerFactory emf;
-    private static PersonFacade facade;
+    private static PersonFacade fc;
+    private static Person p1, p2;
 
-    public FacadeExampleTest() {
+    public PersonFacadeTest() {
     }
 
     //@BeforeAll
@@ -32,7 +34,7 @@ public class FacadeExampleTest {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = PersonFacade.getPersonFacade(emf);
+        fc = PersonFacade.getPersonFacade(emf);
     }
 
     /*   **** HINT **** 
@@ -44,7 +46,9 @@ public class FacadeExampleTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = PersonFacade.getPersonFacade(emf);
+       fc = PersonFacade.getPersonFacade(emf);
+       p1 = new Person("William", "Housefield", "123");
+       p2 = new Person("Asger", "Hermind", "123");
     }
 
     @AfterAll
@@ -57,27 +61,56 @@ public class FacadeExampleTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new RenameMe("Some txt", "More text"));
-            em.persist(new RenameMe("aaa", "bbb"));
-
+            em.createNamedQuery("Person.deleteAllRows").executeUpdate();
+            em.persist(p1);
+            em.persist(p2);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    @AfterEach
-    public void tearDown() {
-//        Remove any data after each test was run
+
+    /**
+     * Test of addPerson method, of class PersonFacade.
+     */
+    @Test
+    public void testAddPerson() {
+        System.out.println("addPerson");
+        Person p = fc.addPerson("test", "test", "test12");
+        assertEquals("test", fc.getPerson(p.getId()).getFirstName());
     }
 
-    // TODO: Delete or change this method 
+    /**
+     * Test of getPerson method, of class PersonFacade.
+     */
     @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+    public void testGetPerson() {
+        System.out.println("getPerson");
+        Person result = fc.getPerson(p1.getId());
+        assertEquals(p1.getFirstName(), result.getFirstName());
+    }
+
+    /**
+     * Test of getAllPeople method, of class PersonFacade.
+     */
+    @Test
+    public void testGetAllPeople() {
+        System.out.println("getAllPeople");
+        List<Person> result = fc.getAllPeople();
+        assertEquals(2, result.size());
+    }
+
+    /**
+     * Test of deletePerson method, of class PersonFacade.
+     */
+    @Test
+    public void testDeletePerson() {
+        System.out.println("deletePerson");
+        assertEquals("William", fc.deletePerson(p1.getId()).getFirstName());
     }
 
 }

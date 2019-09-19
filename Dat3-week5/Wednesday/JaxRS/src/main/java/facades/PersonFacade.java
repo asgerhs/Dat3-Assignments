@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class PersonFacade {
+public class PersonFacade implements IPersonFacade {
 
     private static PersonFacade instance;
     private static EntityManagerFactory emf;
@@ -48,6 +48,7 @@ public class PersonFacade {
         
     }
     
+    @Override
     public Person addPerson(String fName, String lName, String phone){
         EntityManager em = emf.createEntityManager();
         Person p = new Person(fName, lName, phone);
@@ -61,7 +62,7 @@ public class PersonFacade {
         }
     }
     
-    
+    @Override
     public Person getPerson(int id){
        EntityManager em = emf.createEntityManager();
        Person p;
@@ -75,6 +76,7 @@ public class PersonFacade {
        return p;
     }
     
+    @Override
     public List<Person> getAllPeople(){
         EntityManager em = emf.createEntityManager();
         try{
@@ -86,16 +88,30 @@ public class PersonFacade {
         }
     }
     
+   @Override 
     public Person deletePerson(int id){
         EntityManager em = emf.createEntityManager();
+        Person p;
         try{
             em.getTransaction().begin();
-            TypedQuery<Person> query = em.createQuery("DELETE p FROM Person p WHERE p.id = :id", Person.class).setParameter("id", id);
-            return query.getSingleResult();
+            p = em.find(Person.class, id);
+            em.remove(p);
+            em.getTransaction().commit();
+            return p;
         }finally{
             em.close();
         }
     }
+
+
+    @Override
+    public Person editPerson(Person p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+ 
+
+   
     
     
 
