@@ -45,3 +45,5 @@ nbdist/
 
 # End of https://www.gitignore.io/api/macos,netbeans,java-web
 .DS_Store
+Dat3-week5/Friday/ORM_JPA/nb-configuration.xml
+Dat3-week5/Wednesday:Thursday/JaxRS/nb-configuration.xml
