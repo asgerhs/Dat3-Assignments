@@ -2,6 +2,9 @@
 Assignments hand in master
 
 
-Har været syg hele ugen, så er desværre begrænset hvor meget jeg har nået. 
+Der er virkelig mange ting der er gået galt i det jeg skulle merge en branch til master, så virker meget af onsdag/torsdags opgaven mangler. Prøver at få det hele rettet her lørdag. Beklager jeg virkelig meget. 
 
-Mange løsninger mangler, det beklager jeg. 
+
+https://asgerhs.dk/jaxRS-1.0.1/ er domænet, alle endpoints kan selvfølgelig ses inde under rest. 
+
+Jeg får rettet alt op imorgen så tidligt som muligt og beklager virkelig. Alternativt kan jeg kontaktes på slack eller discord ved spørgsmål. 
