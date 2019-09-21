@@ -7,4 +7,6 @@ Der er virkelig mange ting der er gået galt i det jeg skulle merge en branch ti
 
 https://asgerhs.dk/jaxRS-1.0.1/ er domænet, alle endpoints kan selvfølgelig ses inde under rest. 
 
+Kig inde på den anden branch, der ligger onsdag/torsdags opgaven, den er pt stadig unloadable, men sorce koden ligger stadig derinde. Alle test kunne køres og lyste grønt, og alt fungerede som det skulle, alle opgaver var lavet. 
+
 Jeg får rettet alt op imorgen så tidligt som muligt og beklager virkelig. Alternativt kan jeg kontaktes på slack eller discord ved spørgsmål. 
